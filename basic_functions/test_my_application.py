@@ -21,10 +21,14 @@ def test_locators_get_by_text(page: Page):
     expect(page.get_by_text(text="Installation")).to_be_visible()
 
 
-def test_context_API(playwright):
-    browser = playwright.chromium.launch()
+def test_context_API():
+    playwright = sync_playwright().start()
+    browser = playwright.firefox.launch()
+    # Todo: try to refactor this function:
     context = browser.new_context()
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
     page = context.new_page()
     page.goto('https://playwright.dev/')
-    context.tracing.stop(path="trace.zip")
+    page.screenshot(path="artifacts/example.png")
+    context.tracing.stop(path="../artifacts/trace.zip")
+
