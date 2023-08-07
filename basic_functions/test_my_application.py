@@ -32,3 +32,5 @@ def test_context_API():
     page.screenshot(path="artifacts/example.png")
     context.tracing.stop(path="../artifacts/trace.zip")
 
+
+
